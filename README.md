@@ -9,7 +9,7 @@ Clone the repository using this command: `git clone https://github.com/gabe1031b
 
 ### 2 Navigate to the folder.
 
-Use the command `cd grandmaclicker` in your native terminal.
+Use the command `cd grandmaclickerr` in your native terminal, then `cd grandmaclicker`.
 
 ### 3 Open the file in your File Explorer/Finder/etc.
 
