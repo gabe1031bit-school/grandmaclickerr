@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: lightblue;
+                text-align: center;
+            }
+
+            img {
+                width: 250px;
+                height: 250px;
+                max-width: 250px;
+                max-height: 250px;
+            }
+
+            #grandma {
+                transition: transform 0.2s ease, filter 0.2s ease;
+            }
+
+            #grandma:hover {
+                transform: scale(1.05);
+                filter: brightness(1.08);
+            }
+
+            @keyframes spinOnce {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            #grandma.is-spinning {
+                animation: spinOnce 0.6s ease-in-out;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1> Grandma Clicker </h1>
+        <img src="grandma.png" id="grandma">
+        <p id="amountOfClicks"></p>
+
+        <script src="main.js" defer></script>
+
+    </body>
+</html>

@@ -1,0 +1,9 @@
+{
+    "manifest_version": 3,
+    "name": "Simple Grandma Clicker",
+    "version": "1.0",
+    "description": "A basic clicker, no upgrades, just a Grandma that you click.",
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
