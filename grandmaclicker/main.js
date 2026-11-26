@@ -1,73 +1,113 @@
-const amountOfClicksUI = document.getElementById("amountOfClicks")
-const grandma = document.getElementById("grandma")
-let clickCount = Number(localStorage.getItem("clickCount")) + 0
-const body = document.getElementById("body")
+// set wait cmmd.
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-amountOfClicksUI.textContent = "Clicks:" + clickCount
+const bobIs = document.getElementById("bobis")
+const bobTip = document.getElementById("bobtip")
+const bobUIState = document.getElementById("bobimg")
 
-async function gmaClick() {
-    clickCount++
-    amountOfClicksUI.textContent = "Clicks:" + clickCount;
-    localStorage.setItem("clickCount", clickCount);   
+async function startBob() {
+    bobIs.textContent = "bob is loading, js is enabled!"
+    bobTip.textContent = "Tip: just wait for bob to load."
+    bobUIState.src = "/src/bob/1.png"
+
+    console.log("bob is starting!!")
 }
 
-if (clickCount >= 1000) {
-    gravestone();
-   }
+function bobNormal() {
+    bobIs.textContent = "bob is NORMAL."
+    bobTip.textContent = "Tip: do nothing, for now. he is perfectly fine!"
+    bobUIState.src = "/src/bob/1.png"
 
-grandma.addEventListener("click", function() {
-   gmaClick();
-   if (clickCount > 100) {
-    spinGrandma();
-   }
-
-   if (clickCount >= 1000) {
-    gravestone();
-   }
-})
-
-async function spinGrandma() {
-    grandma.classList.remove("is-spinning");
-    void grandma.offsetWidth;
-    grandma.classList.add("is-spinning");
+    console.log("set BOB to NORMAL.")
 }
 
-grandma.addEventListener("animationend", () => {
-    grandma.classList.remove("is-spinning");
-});
+function bobHungry() {
+    bobIs.textContent = "bob is HUNGRY."
+    bobTip.textContent = "Tip: feed him! click on the button below to feed."
+    bobUIState.src = "/src/bob/4.png"
 
-function gravestone() {
-    grandma.src = "tombstone.png"
-}
+    console.log("set BOB to HUNGRY.")
+} 
 
-let darkModeIsOn = 0
-const allPText = document.getElementsByTagName("p")
-const allH1Text = document.getElementsByTagName("h1")
+function bobHappy() {
+    bobIs.textContent = "bob is HAPPY!"
+    bobTip.textContent = "Tip: do nothing, he is cool!"
+    bobUIState.src = "/src/bob/2.png"
 
-// added dark mode toggle to meet req. mbmb
+    console.log("set BOB to HAPPY.")
+}  
 
-function darkmodetoggle() {
-    if (darkModeIsOn === 0) {
-        body.style.backgroundColor = "darkblue"
+function bobSad() {
+    bobIs.textContent = "bob is SAD. :("
+    bobTip.textContent = "Tip: click on the entertain button below this text!"
+    bobUIState.src = "/src/bob/3.png"
 
-        for (let p of allPText) {
-            allPText.style.color = "white"
+    console.log("set BOB to SAD.")
+} 
+
+async function main() {
+
+    let bobState = 1;
+
+    startBob();
+    await wait(2000);
+    bobNormal();
+    while(true) {
+        if (bobState === 1) {
+            await wait(50000);
+            bobSad();
+        } else if (bobState === -1){
+            bobNormal();
+            await wait(100)
+        } else {
+            bobHungry(); 
         }
-        for (let h1 of allH1Text) {
-            allH1Text.style.color = "white"
-        }
+        await wait(11000)
 
-        darkModeIsOn = 1
-    } else if (darkModeIsOn === 1) {
-        body.style.backgroundColor = "lightblue"
-
-        for (let p of allPText) {
-            allPText.style.color = "black"
-        }
-        for (let h1 of allH1Text) {
-            allH1Text.style.color = "black"
-        }
-
-        darkModeIsOn = 0
+        
     }
 }
+
+async function pressEntertain() {
+    await wait(5000);
+    bobHappy();
+    bobState = 2
+    await wait(60000);
+    bobNormal();
+    bobState = 1
+}
+
+async function pressFeast() {
+    await wait(5000);
+    bobHappy();
+    bobState = 2;
+    await wait(120000);
+    bobHungry();
+    bobState = 3
+}
+
+async function pressSadMovie() {
+    await wait(5000);
+    bobSad();
+    bobState = -1
+    await wait(5000);
+    bobNormal();
+    bobState = 1
+}
+
+const startTime = Date.now();
+const bobAge = document.getElementById("bobAge")
+
+setInterval(() => {
+    const elapsedMs = Date.now() - startTime;
+    const totalSeconds = Math.floor(elapsedMs / 1000);
+
+    const days = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+
+    bobAge.textContent = "bob is about..." + `${days}:${hours}:${minutes}:${seconds}` + " old.";
+}, 1000);
+
+main();
