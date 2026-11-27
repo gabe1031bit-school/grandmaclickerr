@@ -47,5 +47,5 @@ here's some screenshots: _some screenshots may spoil what's gonna happen next to
 
 ## to the reviewer :)
 
-thanks for everything that you do! feedback is genuinely appreciated, keep it coming. also my bad for kind of forgetting about grandma's requirements. have a great day. - gabe :)
+thanks for everything that you do! feedback is genuinely appreciated, keep it coming. also my bad for kind of forgetting about grandma's requirements. **by now, _100%_ of them is fixed!** have a great day. - gabe :)
 
